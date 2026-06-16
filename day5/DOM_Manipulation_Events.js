@@ -66,3 +66,39 @@ list1.appendChild(li);
 //         alert("user input is stored..");
 //     }
 // )
+
+// Event Bubbling -> browser event ko travel krata h.
+
+// const parent = document.querySelector("#parent");
+
+// const child = document.querySelector("#child");
+
+// parent.addEventListener(
+//     "click",
+//     ()=>{
+//         console.log("Parent");
+//     }
+// )
+
+// child.addEventListener(
+//     "click",
+//     ()=>{
+//         console.log("child");
+//     }
+// )
+
+// when i am hitting button click what will be the output??
+
+// child -> parent
+
+// document -> HTML -> body -> div -> button.
+
+// Event delegation -> adding addEventLister to the parent inplace of adding EventListner to all childs separate
+
+const parent = document.getElementById("parent");
+
+parent.addEventListener("click", (e) => {
+  console.log("Parent clicked");
+  console.log("Event target:", e.target); // The actual clicked element
+  console.log("Current target:", e.currentTarget); // The element with the listener
+});
