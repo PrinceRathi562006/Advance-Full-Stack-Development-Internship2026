@@ -1,178 +1,266 @@
-// // import React from 'react'
+import { useState } from "react";
 
-// export const Card = ({ items }) => {
-//   return (
-//     <>
-//       <div
-//         style={{
-//           width: "520px",
-//           padding: "20px",
-//           margin: "30px",
-//           background: "#ffffff",
-//           borderRadius: "20px",
-//           boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-//         }}
-//       >
-//         <h1
-//           style={{
-//             textAlign: "center",
-//             marginBottom: "20px",
-//             color: "#232f3e",
-//             fontSize: "28px",
-//           }}
-//         >
-//           Keep Shopping For...
-//         </h1>
+export const Card = ({ items, cartItems, setCartItems }) => {
+  const [quantities, setQuantities] = useState(
+    items.map((item) => Number(item.quantity))
+  );
 
-//         <div
-//           style={{
-//             display: "grid",
-//             gridTemplateColumns: "repeat(2, 1fr)",
-//             gap: "15px",
-//           }}
-//         >
-//           {items.map((item, index) => (
-//             <div
-//               key={index}
-//               style={{
-//                 background: "#f8f9fa",
-//                 borderRadius: "15px",
-//                 padding: "12px",
-//                 textAlign: "center",
-//                 transition: "0.3s",
-//                 cursor: "pointer",
-//                 boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-//               }}
-//             >
-//               <img
-//                 src={item.image}
-//                 alt={item.title}
-//                 style={{
-//                   width: "100%",
-//                   height: "120px",
-//                   objectFit: "contain",
-//                   marginBottom: "10px",
-//                 }}
-//               />
+  const increaseQuantity = (index) => {
+    const updated = [...quantities];
+    updated[index] += 1;
+    setQuantities(updated);
+  };
 
-//               <h3
-//                 style={{
-//                   fontSize: "16px",
-//                   color: "#222",
-//                   marginBottom: "5px",
-//                 }}
-//               >
-//                 {item.title}
-//               </h3>
+  const decreaseQuantity = (index) => {
+    const updated = [...quantities];
 
-//               <p
-//                 style={{
-//                   color: "#007185",
-//                   fontWeight: "500",
-//                 }}
-//               >
-//                 {item.views} viewed
-//               </p>
-//             </div>
-//           ))}
-//         </div>
+    if (updated[index] > 0) {
+      updated[index] -= 1;
+      setQuantities(updated);
+    }
+  };
 
-//         <button
-//           style={{
-//             marginTop: "20px",
-//             width: "100%",
-//             padding: "12px",
-//             border: "none",
-//             borderRadius: "10px",
-//             background: "#ff9900",
-//             color: "#fff",
-//             fontSize: "16px",
-//             fontWeight: "600",
-//             cursor: "pointer",
-//           }}
-//         >
-//           View All Items
-//         </button>
-//       </div>
-//     </>
-//   );
-// };
+  const addToCart = (product, quantity) => {
+    if (quantity <= 0) return;
 
-export const Card = ({ items }) => {
+    const existingItem = cartItems.find(
+      (item) => item.id === product.id
+    );
+
+    if (existingItem) {
+      const updatedCart = cartItems.map((item) =>
+        item.id === product.id
+          ? {
+              ...item,
+              quantity: item.quantity + quantity,
+            }
+          : item
+      );
+
+      setCartItems(updatedCart);
+    } else {
+      setCartItems([
+        ...cartItems,
+        {
+          ...product,
+          quantity,
+        },
+      ]);
+    }
+  };
+
   return (
-    <>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns:
+          "repeat(auto-fill,minmax(280px,1fr))",
+        gap: "25px",
+        padding: "20px",
+      }}
+    >
       {items.map((item, index) => (
         <div
-          key={index}
+          key={item.id}
           style={{
             background: "#f8f9fa",
             borderRadius: "15px",
-            padding: "12px",
+            padding: "15px",
+            boxShadow:
+              "0 4px 12px rgba(0,0,0,0.08)",
             textAlign: "center",
-            transition: "0.3s",
-            cursor: "pointer",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
           }}
         >
-          <img
-            src={item.image}
-            alt={item.title}
-            style={{
-              width: "100%",
-              height: "120px",
-              objectFit: "contain",
-              marginBottom: "10px",
-            }}
-          />
+          {/* Stock Badge */}
+          <div style={{ position: "relative" }}>
+            <span
+              style={{
+                position: "absolute",
+                right: "0",
+                top: "0",
+                background:
+                  item.stock > 0
+                    ? "#28a745"
+                    : "#dc3545",
+                color: "#fff",
+                padding: "5px 10px",
+                borderRadius: "20px",
+                fontSize: "12px",
+              }}
+            >
+              {item.stock > 0
+                ? "In Stock"
+                : "Out of Stock"}
+            </span>
+
+            <img
+              src={item.image}
+              alt={item.title}
+              style={{
+                width: "100%",
+                height: "200px",
+                objectFit: "contain",
+              }}
+            />
+          </div>
 
           <h3
             style={{
-              fontSize: "16px",
-              color: "#222",
-              marginBottom: "5px",
+              color: "#1e3c72",
+              minHeight: "50px",
             }}
           >
             {item.title}
           </h3>
 
-          <h3
+          <p>
+            ⭐ {item.rating} | {item.category}
+          </p>
+
+          <p>Product #{index + 1}</p>
+
+          {/* Quantity Selector */}
+          <div
             style={{
-              fontSize: "16px",
-              color: "#222",
-              marginBottom: "5px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+              marginBottom: "15px",
             }}
           >
-            {item.rating}
-          </h3>
+            <button
+              onClick={() =>
+                decreaseQuantity(index)
+              }
+              style={{
+                width: "35px",
+                height: "35px",
+                border: "none",
+                borderRadius: "50%",
+                background: "#dc3545",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              -
+            </button>
+
+            <span
+              style={{
+                fontWeight: "bold",
+                fontSize: "18px",
+              }}
+            >
+              {quantities[index]}
+            </span>
+
+            <button
+              onClick={() =>
+                increaseQuantity(index)
+              }
+              style={{
+                width: "35px",
+                height: "35px",
+                border: "none",
+                borderRadius: "50%",
+                background: "#28a745",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              +
+            </button>
+          </div>
+
+          {item.stock > 0 &&
+            item.stock <= 5 && (
+              <p
+                style={{
+                  color: "red",
+                  fontWeight: "bold",
+                }}
+              >
+                🔥 Only {item.stock} Left!
+              </p>
+            )}
+
+          <div
+            style={{
+              background: "#eef2f7",
+              padding: "10px",
+              borderRadius: "10px",
+            }}
+          >
+            <h4>Product Details</h4>
+            <p>{item.description}</p>
+          </div>
 
           <p
             style={{
-              color: "#007185",
-              fontWeight: "500",
+              color: "green",
+              fontWeight: "bold",
             }}
           >
-            {item.lastMonthSell}
+            🚚 Free Delivery
           </p>
 
-          <p
+          <div
             style={{
-              color: "#007185",
-              fontWeight: "500",
+              display: "flex",
+              gap: "10px",
+              marginTop: "15px",
             }}
           >
-            {item.price}
-          </p>
+            <button
+              onClick={() =>
+                addToCart(
+                  item,
+                  quantities[index]
+                )
+              }
+              disabled={
+                item.stock <= 0 ||
+                quantities[index] <= 0
+              }
+              style={{
+                flex: 1,
+                background:
+                  item.stock > 0
+                    ? "#1e3c72"
+                    : "#999",
+                color: "#fff",
+                border: "none",
+                padding: "12px",
+                borderRadius: "8px",
+                cursor:
+                  item.stock > 0
+                    ? "pointer"
+                    : "not-allowed",
+              }}
+            >
+              🛒 Add Cart
+            </button>
 
-          <p
-            style={{
-              color: "#007185",
-              fontWeight: "500",
-            }}
-          >
-            {item.DeliveryDetails}
-          </p>
+            <button
+              disabled={item.stock <= 0}
+              style={{
+                flex: 1,
+                background:
+                  item.stock > 0
+                    ? "#ff9900"
+                    : "#999",
+                color: "#fff",
+                border: "none",
+                padding: "12px",
+                borderRadius: "8px",
+              }}
+            >
+              ⚡ Buy Now
+            </button>
+          </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
