@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navbar from "./components/navbar.jsx";
-import MainLoanding from "./components/MainLoanding.jsx";
+import MainLoanding from "./components/MainLoading.jsx";
 import "./App.css";
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
   };
 
   const totalItems = cartItems.reduce(
-    (total, item) => total + item.quantity,
+    (total, item) => total + item,
     0
   );
 
