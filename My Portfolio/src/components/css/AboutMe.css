@@ -1,0 +1,323 @@
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* ================= Main Section ================= */
+
+.mainBox{
+    min-height:100svh;
+    width:100%;
+    padding:90px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:70px;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#0f172a);
+    color:#fff;
+}
+
+/* ================= Left Side ================= */
+
+.box1{
+    flex:1;
+    animation:slideLeft .9s ease;
+}
+
+.box1 h1{
+    font-size:3.2rem;
+    font-weight:700;
+    margin-bottom:20px;
+    display:inline-block;
+    position:relative;
+}
+
+.box1 h1::after{
+    content:"";
+    position:absolute;
+    width:70%;
+    height:4px;
+    background:#38bdf8;
+    left:0;
+    bottom:-10px;
+    border-radius:10px;
+}
+
+.box1 p{
+    margin-top:35px;
+    font-size:1.08rem;
+    line-height:2;
+    color:#d1d5db;
+    text-align:justify;
+}
+
+/* ================= Right Side ================= */
+
+.box2{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+    animation:slideRight .9s ease;
+}
+
+.box2 div{
+    position:relative;
+    overflow:hidden;
+
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(18px);
+
+    border-radius:20px;
+    padding:35px 20px;
+    text-align:center;
+
+    transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+
+/* Shine Effect */
+
+.box2 div::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+    45deg,
+    transparent,
+    rgba(255,255,255,.15),
+    transparent
+    );
+
+    transform:translateX(-100%);
+    transition:.8s;
+}
+
+.box2 div:hover::before{
+    transform:translateX(100%);
+}
+
+/* Glow */
+
+.box2 div::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    box-shadow:0 0 35px rgba(56,189,248,.25);
+    opacity:0;
+    transition:.35s;
+    pointer-events:none;
+}
+
+.box2 div:hover::after{
+    opacity:1;
+}
+
+/* Hover */
+
+.box2 div:hover{
+    transform:translateY(-10px) scale(1.05);
+    border-color:#38bdf8;
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+
+.box2 h2{
+    font-size:3rem;
+    color:#38bdf8;
+    margin-bottom:12px;
+    font-weight:700;
+}
+
+.box2 p{
+    color:#f1f5f9;
+    font-size:1rem;
+    font-weight:500;
+    letter-spacing:.5px;
+}
+
+/* ================= Floating Animation ================= */
+
+.box2 div:nth-child(1){
+    animation:float 5s ease-in-out infinite;
+}
+
+.box2 div:nth-child(2){
+    animation:float 5s ease-in-out infinite .5s;
+}
+
+.box2 div:nth-child(3){
+    animation:float 5s ease-in-out infinite 1s;
+}
+
+.box2 div:nth-child(4){
+    animation:float 5s ease-in-out infinite 1.5s;
+}
+
+@keyframes float{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+}
+
+/* ================= Animations ================= */
+
+@keyframes slideLeft{
+
+from{
+opacity:0;
+transform:translateX(-70px);
+}
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+
+@keyframes slideRight{
+
+from{
+opacity:0;
+transform:translateX(70px);
+}
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+
+/* ================= Tablet ================= */
+
+@media(max-width:992px){
+
+.mainBox{
+
+flex-direction:column;
+text-align:center;
+padding:80px 6%;
+gap:50px;
+
+}
+
+.box1 h1::after{
+
+left:50%;
+transform:translateX(-50%);
+
+}
+
+.box1 p{
+
+text-align:center;
+
+}
+
+.box2{
+
+width:100%;
+
+}
+
+}
+
+/* ================= Mobile ================= */
+
+@media(max-width:768px){
+
+.mainBox{
+
+padding:70px 25px;
+gap:40px;
+
+}
+
+.box1 h1{
+
+font-size:2.5rem;
+
+}
+
+.box1 p{
+
+font-size:1rem;
+line-height:1.8;
+
+}
+
+.box2{
+
+grid-template-columns:1fr;
+
+}
+
+.box2 div{
+
+padding:30px;
+
+}
+
+.box2 h2{
+
+font-size:2.4rem;
+
+}
+
+}
+
+/* ================= Small Mobile ================= */
+
+@media(max-width:480px){
+
+.mainBox{
+
+padding:60px 20px;
+
+}
+
+.box1 h1{
+
+font-size:2rem;
+
+}
+
+.box1 p{
+
+font-size:.95rem;
+
+}
+
+.box2 h2{
+
+font-size:2rem;
+
+}
+
+.box2 p{
+
+font-size:.95rem;
+
+}
+
+}

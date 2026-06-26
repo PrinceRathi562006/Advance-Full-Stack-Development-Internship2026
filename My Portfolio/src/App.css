@@ -1,0 +1,225 @@
+/* ==============================
+   GOOGLE FONT
+================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+/* ==============================
+   GLOBAL RESET
+================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:"Poppins",sans-serif;
+
+    background:#050505;
+
+    color:white;
+
+    overflow-x:hidden;
+
+    scroll-behavior:smooth;
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+}
+
+/* ==============================
+   APP CONTAINER
+================================= */
+
+#root{
+    width:100%;
+}
+
+.App{
+    width:100%;
+}
+
+/* ==============================
+   SECTION SPACING
+================================= */
+
+section{
+    width:100%;
+    scroll-margin-top:80px;
+}
+
+/* ==============================
+   SMOOTH ANIMATION
+================================= */
+
+section{
+    animation:fadeUp .8s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ==============================
+   CUSTOM SCROLLBAR
+================================= */
+
+::-webkit-scrollbar{
+    width:12px;
+}
+
+::-webkit-scrollbar-track{
+    background:#111;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:linear-gradient(
+        180deg,
+        #38bdf8,
+        #2563eb
+    );
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:linear-gradient(
+        180deg,
+        #60a5fa,
+        #3b82f6
+    );
+
+}
+
+/* Firefox */
+
+*{
+    scrollbar-width:thin;
+    scrollbar-color:#38bdf8 #111;
+}
+
+/* ==============================
+   TEXT SELECTION
+================================= */
+
+::selection{
+    background:#38bdf8;
+    color:white;
+}
+
+/* ==============================
+   LINKS
+================================= */
+
+a{
+    text-decoration:none;
+    color:inherit;
+    transition:.3s;
+}
+
+a:hover{
+    color:#38bdf8;
+}
+
+/* ==============================
+   IMAGES
+================================= */
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+/* ==============================
+   FOOTER
+================================= */
+
+.footer{
+
+    background:#0b0b0b;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+
+    padding:35px 20px;
+
+    margin-top:40px;
+
+}
+
+.footer p{
+
+    color:#cbd5e1;
+
+    font-size:15px;
+
+    margin:8px 0;
+
+}
+
+.footer strong{
+
+    color:#38bdf8;
+
+}
+
+/* ==============================
+   RESPONSIVE
+================================= */
+
+@media(max-width:992px){
+
+    .footer{
+        padding:30px 15px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    html{
+        font-size:95%;
+    }
+
+    .footer p{
+        font-size:14px;
+    }
+
+}
+
+@media(max-width:480px){
+
+    html{
+        font-size:90%;
+    }
+
+    .footer{
+
+        padding:25px 10px;
+
+    }
+
+}
