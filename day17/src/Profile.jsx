@@ -1,11 +1,15 @@
-import {useContext} from "react"
-import UserContext from "./UserContext.jsx"
+import { useContext } from "react";
+import UserContext from "./UserContext";
 
 const Profile = () => {
-    const user = useContext(UserContext);
-  return (
-    <div>Profile name is {user}</div>
-  )
-}
+  const { user, theme } = useContext(UserContext);
 
-export default Profile
+  return (
+    <div>
+      <h3>{user}</h3>
+      <p>Current Theme: {theme}</p>
+    </div>
+  );
+};
+
+export default Profile;

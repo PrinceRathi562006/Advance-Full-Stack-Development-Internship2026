@@ -1,12 +1,29 @@
-import Profile from "../Profile.jsx"
+import { useContext } from "react";
+import UserContext from "../UserContext";
+import Profile from "../Profile";
 
-const navbar = () => {
+const Navbar = () => {
+  const { theme, changeTheme } = useContext(UserContext);
+
   return (
-    <div>navbar
-        
+    <div>
+      <h2>Navbar</h2>
+
+      <button
+        onClick={changeTheme}
+        style={{
+          backgroundColor: theme === "light" ? "red" : "lightblue",
+          color: theme === "light" ? "white" : "white",
+          padding: "10px 20px",
+          cursor: "pointer",
+        }}
+      >
+  {theme === "light" ? "Dark Mode" : "Light Mode"}
+</button>
+
       <Profile />
     </div>
-  )
-}
+  );
+};
 
-export default navbar
+export default Navbar;
