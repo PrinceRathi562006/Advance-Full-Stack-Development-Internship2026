@@ -49,6 +49,9 @@
 import { useReducer, useState } from "react";
 import products from "./components/Product";
 import CartReducer, { initialState } from "./components/CartReducer";
+import UseCallbackUseMemoExample from "./components/UseCallBackUseMemoExample";
+import UseMemoExample from "./components/useMemoExample"
+import SortExample from "./components/SortExample";
 
 const App = () => {
   const [state, dispatch] = useReducer(CartReducer, initialState);
@@ -215,6 +218,10 @@ const App = () => {
           </div>
         ))
       )}
+
+      <UseCallbackUseMemoExample />
+      <UseMemoExample />
+      <SortExample />
     </div>
   );
 };
